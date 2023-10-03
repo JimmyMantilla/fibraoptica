@@ -1,6 +1,7 @@
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
+import pandas as pd
 
 def main():
     st.title("Red Óptica Pasiva Gigabit (GPON) - Conexión entre Sedes")
@@ -25,31 +26,165 @@ def main():
     En resumen, una Red Óptica Pasiva Gigabit (GPON) es una solución de alta velocidad y eficiente en términos de ancho de banda para proporcionar una amplia gama de servicios a los usuarios finales utilizando tecnología de fibra óptica y una arquitectura de red pasiva.
     """)
 
-    equipos_huawei = [
-        {"nombre": "OLT Huawei 5608T", "descripcion": "Equipo central de la red GPON que controla la distribución de datos a través de la fibra óptica hacia las ONUs en las sedes remotas.", "datasheet": "https://domusntw.com/wp-content/uploads/HUAWEI-OLT-MA5608T_Datasheet.pdf", "imagen": "HuaweiMA5608T.png", "precio": 5000},
-        {"nombre": "Splitter Huawei 1x32", "descripcion": "Splitter óptico utilizado para dividir la señal óptica hacia múltiples ONUs en cada sede.", "datasheet": "http://www.keweifiber.com/1x4-1x8-1x16-1x32-1x64-compact-splitter-1-8-port-FDT-Huawei-Optical-Fiber-PLC-Splitter-LGX-type-Splitter-Planar-Light-Circuit-pd44474841.html", "imagen": "Huaweisplitter.jpg", "precio": 200},
-        {"nombre": "ONU Huawei EG8010H", "descripcion": "Unidades de red en las sedes remotas que brindan servicios de banda ancha GPON a los usuarios.", "datasheet": "https://www.router-switch.com/huawei-eg8010h-datasheet-pdf.html", "imagen": "huaweiEG8010H.jpg", "precio": 1000},
-        {"nombre": "Splitter Huawei 1x8", "descripcion": "Splitter óptico utilizado en el trayecto a Piedecuesta para dividir la señal óptica hacia múltiples ONUs.","datasheet": "http://www.keweifiber.com/1x4-1x8-1x16-1x32-1x64-compact-splitter-1-8-port-FDT-Huawei-Optical-Fiber-PLC-Splitter-LGX-type-Splitter-Planar-Light-Circuit-pd44474841.html" ,"imagen": "Huaweisplitter.jpg", "precio": 1000},
-        {"nombre": "Cisco ONS 15454 MSTP 1", "descripcion": "Amplificador óptico (repetidor óptico) utilizado en el trayecto a Bucaramanga para mantener la calidad de la señal óptica.", "datasheet": "https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15454-m6-multiservice-transport-platform-mstp/data_sheet_c78-601956.html", "imagen": "CISCOONS15454.jpg", "precio": 300},
-        {"nombre": "Splitter Huawei 1x4", "descripcion": "Splitter óptico utilizado en el trayecto a Bucaramanga para dividir la señal óptica hacia múltiples ONUs.","datasheet": "http://www.keweifiber.com/1x4-1x8-1x16-1x32-1x64-compact-splitter-1-8-port-FDT-Huawei-Optical-Fiber-PLC-Splitter-LGX-type-Splitter-Planar-Light-Circuit-pd44474841.html", "imagen": "Huaweisplitter.jpg", "precio": 1000},
-        {"nombre": "Cisco ONS 15454 MSTP 2", "descripcion": "Amplificador óptico (repetidor óptico) utilizado en el trayecto a Bucaramanga para mantener la calidad de la señal óptica.", "datasheet": "https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15454-m6-multiservice-transport-platform-mstp/data_sheet_c78-601956.html", "imagen": "CISCOONS15454.jpg", "precio": 300},
-        {"nombre": "Splitter Huawei 1x2", "descripcion": "Splitter óptico utilizado en el trayecto a El Limonal para dividir la señal óptica hacia múltiples ONUs.","datasheet": "http://www.keweifiber.com/1x4-1x8-1x16-1x32-1x64-compact-splitter-1-8-port-FDT-Huawei-Optical-Fiber-PLC-Splitter-LGX-type-Splitter-Planar-Light-Circuit-pd44474841.html", "imagen": "Huaweisplitter.jpg", "precio": 1000},
-        {"nombre": "Cisco ONS 15454 MSTP 3", "descripcion": "Amplificador óptico (repetidor óptico) utilizado en el trayecto a El Limonal para mantener la calidad de la señal óptica.","datasheet": "https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15454-m6-multiservice-transport-platform-mstp/data_sheet_c78-601956.html" ,"imagen": "CISCOONS15454.jpg", "precio": 300},
-    ]
+        
+    tab1, tab2, tab3, tab4 = st.tabs(["OLT Huawei 5608T", "Splitter Huawei", "ONU Huawei EG8010H", "Cisco ONS 15454 MSTP"])
 
-    # Calcular el costo total del presupuesto
-    costo_total = sum(equipo['precio'] for equipo in equipos_huawei)
+    with tab1:
+        
+       st.header("OLT Huawei 5608T")
+       
+    
+       imagen_url1 = "https://sc01.alicdn.com/kf/H7dcfbee642ae477da308158e4478831fu.png" 
+       st.image(imagen_url1, caption=' Huawei MA5608T-24', use_column_width=True)
+       st.write(" Equipo central de la red GPON que controla la distribución de datos a través de la fibra óptica hacia las ONUs en las sedes remotas.")
+       st.subheader("Información sobre el MA5608T-24 (CARACTERISTICAS)")
+       texto_largo1 = """
+       - **24 puertos:** Como su nombre indica, esta OLT tiene 24 puertos, lo que significa que puede servir hasta 24 clientes u ubicaciones finales en la red GPON.
+    
+       - **Capacidad de Escalabilidad:** Aunque tiene un número limitado de puertos, el MA5608T-24 es escalable y puede expandirse con el tiempo para agregar más puertos o capacidades a medida que crece la red.
+    
+       - **Interfaces de Conexión:** Proporciona interfaces para conexiones GPON y Ethernet para conectar clientes y otros dispositivos en la red.
+    
+       - **Gestión Avanzada:** Ofrece herramientas avanzadas de gestión y administración para facilitar la configuración, supervisión y mantenimiento de la red.
+    
+       - **Compatibilidad con Servicios de Banda Ancha:** Puede ofrecer servicios de banda ancha de alta velocidad, incluyendo Internet, voz y video a los clientes conectados.
+    
+       - **Alta Disponibilidad:** Está diseñado para proporcionar alta disponibilidad y confiabilidad en la red.
+    
+    
+       """
+    
+    
+    
+       st.markdown(texto_largo1)
+       datasheet1 = 'https://domusntw.com/wp-content/uploads/HUAWEI-OLT-MA5608T_Datasheet.pdf'
+       
+       st.subheader("Datasheet y Caracteristicas")
+       
+       if st.button('Ir a la Página 1'):
+           
+           st.markdown(f'[Huawei MA5608T-24]({datasheet1})')
+    
+       
+       
+    
+    with tab2:
+        
+       st.header("Splitter Huawei")
+       imagen_url2 = "https://es.springoptical.com/Content/File_Img/S_Product/2016-08-09/201608091628277492918.jpg" 
+       st.image(imagen_url2, caption='Splitter Huawei', use_column_width=True)
+       st.write("Splitter óptico utilizado para dividir la señal óptica hacia múltiples ONUs en cada sede.")
+       st.subheader("Información sobre el Splitter Huawei (CARACTERISTICAS)")
+       texto_largo2 = """
+       - **El Huawei splitter es un dispositivo pasivo que divide una señal de fibra óptica en dos o más señales.
 
-    st.subheader("Equipos Huawei GPON")
-    st.write("Presupuesto Total: $", costo_total)
+       - **El Huawei splitter está disponible en varios modelos, con diferentes rangos de división y pérdidas de inserción.
 
-    # Mostrar los datos de los equipos
-    for equipo in equipos_huawei:
-        st.write(f"**{equipo['nombre']}**")
-        st.write(f"Descripción: {equipo['descripcion']}")
-        st.write(f"Precio: ${equipo['precio']}")
-        st.markdown(f"[Enlace al datasheet]({equipo['datasheet']})")
-        st.image(equipo['imagen'], use_column_width=True)
+       - **El rango de división indica el número de señales en las que se dividirá la señal original.
+
+       - **La pérdida de inserción indica la cantidad de potencia que se pierde al dividir la señal.
+
+       - **Cuanto menor sea la pérdida de inserción, mejor será la calidad de la señal.
+       
+    
+       """
+       
+       st.markdown(texto_largo2)
+       
+       datasheet2 = 'http://www.keweifiber.com/1x4-1x8-1x16-1x32-1x64-compact-splitter-1-8-port-FDT-Huawei-Optical-Fiber-PLC-Splitter-LGX-type-Splitter-Planar-Light-Circuit-pd44474841.html'
+       
+       st.subheader("Datasheet y Caracteristicas")
+       
+       if st.button('Ir a la Página 2'):
+           
+           st.markdown(f'[Splitter Huawei]({datasheet2})')
+       
+       
+    
+    with tab3:
+        
+       st.header("ONU Huawei EG8010H")
+       imagen_url3 = "https://www.batna24.com/products/DNXFLPQLGRMMPL/hg8310m/8310m.webp" 
+       st.image(imagen_url3, caption='ONU Huawei EG8010H', use_column_width=True)
+       st.write("Unidades de red en las sedes remotas que brindan servicios de banda ancha GPON a los usuarios.")
+       st.subheader("Información sobre el ONU Huawei EG8010H (CARACTERISTICAS)")
+       
+       texto_largo3 = """
+       - **El Huawei EG8010H es un terminal de red óptica (ONT) para interiores utilizado en la solución FTTH de Huawei.
+       
+       - **El EG8010H proporciona acceso por banda ultraancha a usuarios domésticos y pequeñas oficinas mediante el uso de la tecnología GPON.
+       
+       - **El EG8010H tiene un puerto PON GPON y un puerto Ethernet GE.
+       
+       - **El EG8010H soporta velocidades de datos de hasta 2,5 Gbps de descarga y 1,25 Gbps de subida.
+       
+       - **El EG8010H soporta IPv4 e IPv6.
+       
+       - **El EG8010H soporta VLAN, QoS y ACL.
+       
+       - **El EG8010H soporta enrutamiento NAT y DHCP.
+       
+       - **El EG8010H soporta bridge mode y routing mode.
+       
+       - ** El EG8010H soporta TR-069 para gestión remota.
+       
+       
+       """
+       
+       st.markdown(texto_largo3)
+       
+       datasheet3 = 'https://www.router-switch.com/huawei-eg8010h-datasheet-pdf.html", "imagen": "huaweiEG8010H.jpg'
+       
+       st.subheader("Datasheet y Caracteristicas")
+       
+       if st.button('Ir a la Página 3'):
+           
+           st.markdown(f'[ONU Huawei EG8010H]({datasheet3})')
+    
+    with tab4:
+        st.header("Cisco ONS 15454 MSTP")
+        imagen_url4 = "https://live.staticflickr.com/6052/6377796155_87d1b86f4c_b.jpg" 
+        st.image(imagen_url4, caption='Cisco ONS 15454 MSTP', use_column_width=True)
+        st.write("Amplificador óptico (repetidor óptico) utilizado en el trayecto a El Limonal para mantener la calidad de la señal óptica.")
+        st.subheader("Información sobre Cisco ONS 15454 MSTP (CARACTERISTICAS)")
+        
+        texto_largo4 = """
+        - **El Cisco ONS 15454 MSTP es una plataforma de transporte multiservicio que proporciona capacidad, inteligencia e interoperabilidad para redes ópticas de próxima generación.
+
+        - **El ONS 15454 MSTP está disponible en varios modelos, con diferentes capacidades y características.
+
+        - **El ONS 15454 MSTP puede transportar una amplia gama de servicios, incluyendo voz, datos, video y servicios de misión crítica.
+
+        - **El ONS 15454 MSTP es compatible con los estándares de la industria, lo que facilita su integración con otras redes.
+        
+        """
+        
+        st.markdown(texto_largo4)
+        
+        datasheet4 = 'https://www.cisco.com/c/en/us/products/collateral/optical-networking/ons-15454-m6-multiservice-transport-platform-mstp/data_sheet_c78-601956.html'
+        
+        st.subheader("Datasheet y Caracteristicas")
+        
+        if st.button('Ir a la Página 5'):
+            
+            st.markdown(f'[Cisco ONS 15454 MSTP-E]({datasheet4})')    
+            
+    data = pd.DataFrame({
+    "Equipo": ["OLT", "Splitter", "ONU", "ONS", "TOTAL"],
+    "Marca": ["Huawei", "Huawei", "Huawei", "Cisco", "-"],
+    "Modelo": ["MA5608T-24", "GENERICO", "EG8010H", "15454 MSTP","-"],
+    "Cantidad": ["1", "4", "1", "3","9"],
+    
+
+    "Precio x Unid": ["US$ 970.00", "US$ 30.00", "US$ 7.50","US$ 1415.00", "US$ 2422.50"], 
+    "Precio Total": ["US$ 970.00 ", "US$ 120.00", "US$ 7.50","US$ 4245.00", "US$ 5342.50"]
+    })
+
+# Título de la página
+
+
+# Crear una tabla en Streamlit para mostrar y editar los datos
+    table = st.table(data)        
 
     # Ubicaciones de las sedes de la Universidad Santo Tomás
     ubicaciones_sedes = {
@@ -110,6 +245,50 @@ def main():
             color='red',  # Cambia el color de las líneas si lo deseas
             weight=2.5
         ).add_to(m)
+        
+        # Agregar hexágono para la celda de cobertura de red óptica
+    folium.Circle(
+        location=[7.136844296154591, -73.12832180456587],  # Ubicación de la sede Bucaramanga
+        fill_color='red',
+        fill_opacity=0.5,
+        number_of_sides=6,  # Hexágono
+        radius=50,  # Radio del hexágono en metros
+        
+        tooltip='Celda Cobertura Sede Bucaramanga'
+    ).add_to(m)
+    
+    
+    
+    folium.Circle(
+        location=[7.066195857926469, -73.09492035409652],  # Ubicación de la sede Bucaramanga
+        fill_color='red',
+        fill_opacity=0.5,
+        number_of_sides=6,  # Hexágono
+        radius=110,  # Radio del hexágono en metros
+        
+        tooltip='Celda Cobertura Sede Floridablanca'
+    
+    ).add_to(m)
+    folium.Circle(
+        location=[7.023262911646313, -73.05971245467781],  # Ubicación de la sede Bucaramanga
+        fill_color='red',
+        fill_opacity=0.5,
+        number_of_sides=6,  # Hexágono
+        radius=150,  # Radio del hexágono en metros
+        
+        tooltip='Celda Cobertura Sede Piedecuesta'
+    ).add_to(m)
+    folium.Circle(
+        location=[7.0084293135346725, -73.05136176052113],  # Ubicación de la sede Bucaramanga
+        fill_color='red',
+        fill_opacity=0.5,
+        number_of_sides=6,  # Hexágono
+        radius=80,  # Radio del hexágono en metros
+        
+        tooltip='Celda Cobertura Sede Limonal'
+    ).add_to(m)
+        
+        
 
     # Llama a la función st_folium para renderizar el mapa de Folium en Streamlit
     st_data = st_folium(m, width=725)
